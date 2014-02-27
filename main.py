@@ -17,9 +17,9 @@ def main():
      b.click(".tsi-full-width > button:nth-child(1)")
      b.click(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(4) > a:nth-child(1)")
      b.wait(3)
-     b.click('a[href="/Services/ServiceDetails/466259"]')
+     b.click('a[href="/Services/ServiceDetails/YOUR-USER-ID-HERE"]')
      b.wait(3)
-     b.click('a[href="/Services/ServiceDetails/466259/ViewUsage]')
+     b.click('a[href="/Services/ServiceDetails/YOUR-USER-ID-HERE/ViewUsage]')
      soup = BeautifulSoup(b.html)
 
      usage = soup.find('span', {'class' : 'tsi-monthlyUsageLabel'})
