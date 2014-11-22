@@ -14,7 +14,7 @@ def main():
      b.load('https://myaccount.teksavvy.com/')
      b.wk_fill('input[name=login]', username)
      b.wk_fill('input[name=password]', password)
-     b.click(".tsi-full-width > button:nth-child(1)")
+     b.click(".tsi-LoginBtnHomePage > button:nth-child(1)")
      b.click(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(4) > a:nth-child(1)")
      b.wait(3)
      b.click('a[href="/Services/ServiceDetails/YOUR-USER-ID-HERE"]')
