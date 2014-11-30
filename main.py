@@ -31,6 +31,8 @@ def main():
     print 'Used: %s' % (pd)
     print 'Remaining: ' + str(CAP-pd)
     print
+    x = raw_input('Press enter to exit ')
+    return    
 
 
 if __name__ == '__main__':
