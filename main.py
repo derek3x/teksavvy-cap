@@ -1,33 +1,38 @@
 #!/usr/bin/env python
 
-import spynner
-from bs4 import BeautifulSoup
-from getpass import getpass
+import httplib, json
 
 def main():
-     username = raw_input('Enter your email address: ')
-     password = getpass('Enter your password: ')
-     print
-     print 'Grabbing info........'
-     print
-     b = spynner.Browser()
-     b.load('https://myaccount.teksavvy.com/')
-     b.wk_fill('input[name=login]', username)
-     b.wk_fill('input[name=password]', password)
-     b.click(".tsi-LoginBtnHomePage > button:nth-child(1)")
-     b.click(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(4) > a:nth-child(1)")
-     b.wait(3)
-     b.click('a[href="/Services/ServiceDetails/YOUR-USER-ID-HERE"]')
-     b.wait(3)
-     b.click('a[href="/Services/ServiceDetails/YOUR-USER-ID-HERE/ViewUsage]')
-     soup = BeautifulSoup(b.html)
+    APIKEY = "YOUR-API-KEY-GOES-HERE"
+    CAP = 150.0
+      
+    headers = {"TekSavvy-APIKey": APIKEY}
+    conn = httplib.HTTPSConnection("api.teksavvy.com")
+    conn.request('GET', '/web/Usage/UsageSummaryRecords?$filter=IsCurrent%20eq%20true', '', headers)
+    response = conn.getresponse()
+    jsonData = response.read()
+      
+    data = json.loads(jsonData)
+    print
+    print 'Please Wait......Getting Information.....' 
+    
+    pd  = data["value"][0]["OnPeakDownload"]
+    #pu  = data["value"][0]["OnPeakUpload"]
+    #opd = data["value"][0]["OffPeakDownload"]
+    #opu = data["value"][0]["OffPeakUpload"]
+    sd  = data["value"][0]["StartDate"]
+    ed  = data["value"][0]["EndDate"]
+     
+     
+    print
+    print str(sd[0:10]) + ' to ' + str(ed[0:10]) + ' :'
+    print
+    print 'Cap: %s' % (CAP)
+    print 'Used: %s' % (pd)
+    print 'Remaining: ' + str(CAP-pd)
+    print
 
-     usage = soup.find('span', {'class' : 'tsi-monthlyUsageLabel'})
-     print 'Used: ' + usage.encode_contents()
-     remaining = soup.find('div', {'class' : 'tsi-progresLabelBottom'})
-     print remaining.encode_contents()
-     cap = soup.find('span', {'class' : 'tsi-progresLabelRigth'})
-     print 'Cap: ' + cap.encode_contents()
 
 if __name__ == '__main__':
-     main()
+    main()
+
