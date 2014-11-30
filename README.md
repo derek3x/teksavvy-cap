@@ -1,12 +1,8 @@
 teksavvy-cap
 ============
 
-Pull teksavvy cap info.
+Pull teksavvy cap info using Teksavvy API.
 
-You will need to edit the code to add your own User ID.  You can get this from your bill or their website.  
+You will need your API key, which can be found on the tekSavvy website (https://myaccount.teksavvy.com/ApiKey/ApiKeyManagement).  
 
-I have tested this with teksavvy cable on their new https://myaccount.teksavvy.com/.
-
-You will need python2, beautifulsoup 4, and spynner
-
-It will ask you for your email address and password.  Then should pull your usage. 
+You will also need to put in your own CAP limit.  The API does not pull that information yet.
